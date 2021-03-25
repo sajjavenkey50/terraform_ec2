@@ -4,7 +4,7 @@ variable "type" {
 
 //creating the windows system
 resource "aws_instance" "WindowsInstance" {
-        ami = "ami-04f33832b669e4355"
+        ami = "ami-0afcbc82a6a511e53"
         instance_type = "t2.micro"
         tags =  {
           Name = "Ec2_Instance_Terraform"
