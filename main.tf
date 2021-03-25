@@ -7,13 +7,13 @@ resource "aws_instance" "windows" {
         ami = "ami-0afcbc82a6a511e53"
         instance_type = "t2.micro"
         tags =  {
-          Name = aws_instance.windows.id
+          Name = random_pet.name.id
         }
 }
 
 // create a security group for rdp access to the windows systems
 resource "aws_security_group" "windows-sg" {
-name        = "${aws_instance.windows.id}-sg"
+name        = "${random_pet.name.id}-sg"
 description = "Allow RDP inbound traffic"
  
   ingress {
