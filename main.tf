@@ -1,6 +1,6 @@
 
 //creating the windows system
-resource "aws_instance" "WindowsInstance" {
+resource "aws_instance" "windows" {
         ami = "ami-04f33832b669e4355"
         instance_type = "t2.micro"
         tags =  {
@@ -9,8 +9,7 @@ resource "aws_instance" "WindowsInstance" {
 }
 
 // create a security group for rdp access to the windows systems
-resource "aws_security_group" "windows-sg-rdp" {
-name        = "windows-sg-rdp"
+resource "aws_security_group" "windows-sg" {
 description = "Allow RDP inbound traffic"
  
   ingress {
@@ -27,11 +26,10 @@ description = "Allow RDP inbound traffic"
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
- 
- 
-  tags = {
-    Name = "Windows-sg-rdp"
-  }
 }
 
-//
+//Security group attachment
+resource "aws_network_interface_sg_attachment" "sg_attachment" {
+  security_group_id    = aws_security_group.windows-sg.id
+  network_interface_id = aws_instance.windows.primary_network_interface_id
+}
