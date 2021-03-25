@@ -3,17 +3,17 @@ variable "type" {
 }
 
 //creating the windows system
-resource "aws_instance" "Windows" {
+resource "aws_instance" "windows" {
         ami = "ami-0afcbc82a6a511e53"
         instance_type = "t2.micro"
         tags =  {
-          Name = windows_name.id
+          Name = aws_instance.windows.id
         }
 }
 
 // create a security group for rdp access to the windows systems
 resource "aws_security_group" "windows-sg" {
-name        = "${windows_name.id}-sg"
+name        = "${aws_instance.windows.id}-sg"
 description = "Allow RDP inbound traffic"
  
   ingress {
