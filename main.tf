@@ -1,3 +1,6 @@
+variable "type" {
+  type = string
+}
 
 //creating the windows system
 resource "aws_instance" "WindowsInstance" {
